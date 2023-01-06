@@ -6,6 +6,16 @@ class SaleOrderApprove(models.Model):
     _inherit = 'sale.order.line'
     _description = 'Sale Order Approval'
 
+    state = fields.Selection(
+        string='State',
+        selection=[
+            ('pending_level_1_approval', 'Pending Level 1 Approval'),
+            ('pending_level_2_approval', 'Pending Level 2 Approval'),
+            ('approved', 'Approved'),
+            ('rejected', 'Rejected'),
+        ]
+    )
+
     sale_order_id = fields.Many2one(
         'sale.order',
         string='Sale Order',
