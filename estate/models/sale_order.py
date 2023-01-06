@@ -9,7 +9,6 @@ class SaleOrder(models.Model):
     string='Approval Status',
     )
 
-    @api.one
     def initiate_approval(self):
         self.ensure_one()
         approval = self.env['sale.order.approval'].create({
