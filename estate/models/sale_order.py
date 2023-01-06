@@ -9,6 +9,12 @@ class SaleOrder(models.Model):
     string='Approval Status',
     )
 
+    approval_id = fields.Many2one(
+        'sale.order.approval',
+        string='Approval',
+        ondelete='cascade',
+    )
+
     def initiate_approval(self):
         self.ensure_one()
         approval = self.env['sale.order.approval'].create({
