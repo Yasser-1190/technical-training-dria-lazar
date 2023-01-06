@@ -9,7 +9,10 @@ class SaleOrder(models.Model):
             if order.partner_id.max_sale_order_amount and order.amount_total > order.partner_id.max_sale_order_amount:
                 raise ValidationError(_('The sale order amount is greater than the maximum allowed amount for the partner.'))
 
-
+    approval_status = fields.Selection(
+    related='approval_id.state',
+    string='Approval Status',
+    )
 
     approval_id = fields.Many2one(
         'sale.order.approval',
