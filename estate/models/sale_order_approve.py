@@ -28,8 +28,6 @@ class SaleOrderApprove(models.Model):
         default='1',
     )
     
-    
-    
     def create_workflow(self):
         workflow = Workflow(self._name)
         # states
@@ -49,3 +47,12 @@ class SaleOrderApprove(models.Model):
         workflow.add_transition('escalate', 'pending_level_1_approval', 'pending_level_2_approval')
         return workflow
 
+    @api.multi
+    def check_amount(self):
+        for order in self:
+            if order.amount < 500:
+                order.approval_id.approve()
+            elif 500 <= order.amount < 2000:
+                order.approval_id.escalate()
+            elif 2000 <= order.amount < 5000:
+                order.approval_id.escalate()

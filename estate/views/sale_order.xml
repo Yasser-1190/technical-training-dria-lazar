@@ -9,8 +9,14 @@
                 <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='tax_id']" position="after">
                     <field name="training_date"/>
                     <field name="employee" widget="many2one_tags"/>
+                    <field name="approval_status" widget="statusbar" clickable="True">
+                        <status string="Pending Level 1 Approval" name="pending_level_1_approval" />
+                        <status string="Pending Level 2 Approval" name="pending_level_2_approval" />
+                        <status string="Approved" name="approved" />
+                    </field>
                 </xpath>
             </field>
+            <button name="initiate_approval" type="object" string="Initiate Approval" class="oe_highlight"/>
         </record>
     </data>
 </odoo>
