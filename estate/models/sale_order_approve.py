@@ -47,7 +47,7 @@ class SaleOrderApprove(models.Model):
         workflow.add_transition('escalate', 'pending_level_1_approval', 'pending_level_2_approval')
         return workflow
 
-    @api.multi
+    @api.one
     def check_amount(self):
         for order in self:
             if order.amount < 500:
