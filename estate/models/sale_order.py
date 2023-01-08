@@ -28,3 +28,23 @@ class SaleOrder(models.Model):
             'level': '1',
         })
         approval.approve()
+    
+    def action_confirm(self):
+        # Confirm the sales order
+        res = super(SaleOrder, self).action_confirm()
+
+        # Create the event and send the email
+        event = self.env['calendar.event'].create({
+            'name': self.name,
+            'start_date': self.date_order,
+            'end_date': self.date_order,
+            'description': self.note,
+            'location': self.partner_shipping_id.name,
+            'attendee_ids': [(6, 0, [self.user_id.partner_id.id])],
+            'organizer_id': self.user_id.partner_id.id,
+            'privacy': 'private'
+        })
+        template = self.env.ref('my_module.email_template_sale_order_confirm')
+        template.send_mail(event.id, force_send=True)
+
+        return res
