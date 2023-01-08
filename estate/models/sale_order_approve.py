@@ -17,7 +17,7 @@ class SaleOrderApprove(models.Model):
     )
 
     approval_status = fields.Selection(
-    related='approval_id.state',
+    related='approval_id.2',
     string='Approval Status',
     )
 
