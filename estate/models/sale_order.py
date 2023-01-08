@@ -10,7 +10,7 @@ class SaleOrder(models.Model):
                 raise ValidationError(_('The sale order amount is greater than the maximum allowed amount for the partner.'))
 
     approval_status = fields.Selection(
-    related='approval_id.state',
+    related='approval_id.1',
     string='Approval Status',
     )
 
