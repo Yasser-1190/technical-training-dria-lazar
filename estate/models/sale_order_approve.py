@@ -16,11 +16,6 @@ class SaleOrderApprove(models.Model):
         ]
     )
 
-    approval_status = fields.Selection(
-    related='approval_id.2',
-    string='Approval Status',
-    )
-
     sale_order_id = fields.Many2one(
         'sale.order',
         string='Sale Order',
