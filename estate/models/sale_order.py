@@ -11,6 +11,12 @@ class SaleOrder(models.Model):
 
     approval_status = fields.Selection(
     string='Approval Status',
+    selection=[
+            ('1', 'Level 1'),
+            ('2', 'Level 2'),
+            ('3', 'Level 3'),
+        ],
+        default='1'
     )
 
     approval_id = fields.Many2one(
